@@ -1,0 +1,4 @@
+/node_modules
+
+# Ignore data backup
+todo-mongo-data

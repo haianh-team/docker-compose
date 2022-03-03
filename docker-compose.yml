@@ -1,0 +1,29 @@
+version: "3.5"
+
+services:
+  app:
+    image: node:12.18.1
+    command : sh -c "npm i && node index.js"
+    working_dir: /app
+    volumes:
+       - ./:/app
+    environment:
+       - DB_HOST=`${DB_HOST}`
+       - DB_NAME=`${DB_NAME}`
+    ports:
+       - 3001:3000
+       #  depends_on:
+       #     db
+  
+  db:
+    image: mongo
+    volumes:
+       - todo-mongo-data:/var/lib/mongo
+    ports:
+       - 27017:27017
+    environment:
+       - DB_HOST=${DB_HOST}
+       - DB_NAME=${DB_NAME}
+  
+volumes:
+   todo-mongo-data:
